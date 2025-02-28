@@ -35,6 +35,7 @@ runs:
       with:
         ref: 'main'
         repository: 'meta-llama/llama-stack'
+        path: 'llama-stack'
 
     - name: Build and publish
       shell: bash

@@ -6,17 +6,7 @@ TEMPLATES=${TEMPLATES:-}
 
 set -euo pipefail
 
-if release_exists "test.pypi"; then
-  echo "Version $VERSION found in test.pypi"
-  PYPI_SOURCE="testpypi"
-elif release_exists "pypi"; then
-  echo "Version $VERSION found in pypi"
-  PYPI_SOURCE="pypi"
-else
-  echo "Version $VERSION not found in either test.pypi or pypi" >&2
-  exit 1
-fi
-
+cd llama-stack
 set -x
 uv venv -p python3.10
 source .venv/bin/activate
