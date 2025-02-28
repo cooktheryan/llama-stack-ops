@@ -2,11 +2,6 @@ name: Publish Docker nightly docker
 
 on:
   workflow_dispatch:  # Keep manual trigger
-    inputs:
-      templates:
-        description: 'Optional comma-separated templates to publish'
-        required: false
-        type: string
 
 jobs:
   publish-nightly-docker-images:
@@ -15,6 +10,6 @@ jobs:
     - uses: actions/checkout@v4
     - uses: ./actions/publish-dockers-nightly
       with:
-        templates: ${{ inputs.templates }}
+        templates: "ollama, remote-vllm"
         dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
         dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
