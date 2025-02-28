@@ -2,6 +2,9 @@ name: 'Publish Docker images'
 description: 'Publish Docker images; Using the main branch'
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 inputs:
   templates:
     description: 'Optional comma-separated templates to publish'
