@@ -33,7 +33,7 @@ jobs:
     - name: Set version variable
       id: set_version
       run: echo "VERSION=nightly-$(date +'%Y%m%d')" >> $GITHUB_ENV
-    - uses: ./actions/publish-dockers-nightly
+    - uses: ./actions/publish-dockers
       with:
         templates: "ollama, together, fireworks, bedrock, remote-vllm, tgi, meta-reference-gpu"
         dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
