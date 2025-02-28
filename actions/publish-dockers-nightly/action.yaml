@@ -1,0 +1,47 @@
+name: 'Publish Docker images'
+description: 'Publish Docker images; Using the main branch'
+inputs:
+  templates:
+    description: 'Optional comma-separated templates to publish'
+    required: false
+    type: string
+  dockerhub_username:
+    description: 'DockerHub username'
+    required: true
+    type: string
+  dockerhub_token:
+    description: 'DockerHub token'
+    required: true
+    type: string
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - uses: astral-sh/setup-uv@v5
+      with:
+        python-version: '3.10'
+        enable-cache: false
+
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ inputs.dockerhub_username }}
+        password: ${{ inputs.dockerhub_token }}
+
+    - name: Pull the main branch of llama-stack
+      uses: actions/checkout@v2
+      with:
+        ref: 'main'
+        repository: 'meta-llama/llama-stack'
+        path: 'llama-stack'
+
+    - name: Build and publish
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+        TEMPLATES: ${{ inputs.templates }}
+      run: |
+        chmod +x ${{ github.action_path }}/main.sh
+        ${{ github.action_path }}/main.sh
