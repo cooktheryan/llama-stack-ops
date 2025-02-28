@@ -21,7 +21,7 @@ build_and_push_docker() {
   docker images
 
   echo "Pushing docker image"
-  docker tag distribution-$template:${VERSION} llamastack/distribution-$template:${VERSION}
+  docker tag distribution-$template:dev llamastack/distribution-$template:${VERSION}
   docker tag distribution-$template:${VERSION} llamastack/distribution-$template:latest
   docker push llamastack/distribution-$template:${VERSION}
   docker push llamastack/distribution-$template:latest
