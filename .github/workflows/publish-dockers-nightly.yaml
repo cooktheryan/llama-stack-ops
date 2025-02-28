@@ -1,0 +1,24 @@
+name: Publish Docker nightly docker
+
+on:
+  workflow_dispatch:  # Keep manual trigger
+    inputs:
+      version:
+        description: 'Version number (e.g. 0.1.1rc2, 0.1.1.dev20250201)'
+        required: true
+        type: string
+      templates:
+        description: 'Optional comma-separated templates to publish'
+        required: false
+        type: string
+
+jobs:
+  publish-docker-images:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ./actions/publish-dockers-nightly
+      with:
+        templates: ${{ inputs.templates }}
+        dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+        dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
