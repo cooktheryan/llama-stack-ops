@@ -2,6 +2,8 @@ name: Publish Docker nightly docker
 
 on:
   workflow_dispatch:  # Keep manual trigger
+  schedule:
+    - cron: '0 0 * * *'  # Every day at midnight
 
 jobs:
   publish-nightly-docker-images:
