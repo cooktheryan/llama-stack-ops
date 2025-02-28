@@ -10,6 +10,6 @@ jobs:
     - uses: actions/checkout@v4
     - uses: ./actions/publish-dockers-nightly
       with:
-        templates: "ollama, remote-vllm"
+        templates: "ollama, together, fireworks, bedrock, remote-vllm, tgi, meta-reference-gpu"
         dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
         dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
