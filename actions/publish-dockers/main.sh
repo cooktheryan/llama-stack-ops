@@ -22,7 +22,7 @@ release_exists() {
 
 if release_exists "test.pypi"; then
   echo "Version $VERSION found in test.pypi"
-  PYPI_SOURCE="testpypi" 
+  PYPI_SOURCE="testpypi"
 elif release_exists "pypi"; then
   echo "Version $VERSION found in pypi"
   PYPI_SOURCE="pypi"
@@ -63,9 +63,7 @@ build_and_push_docker() {
     docker push llamastack/distribution-$template:test-${VERSION}
   else
     docker tag distribution-$template:${VERSION} llamastack/distribution-$template:${VERSION}
-    docker tag distribution-$template:${VERSION} llamastack/distribution-$template:latest
     docker push llamastack/distribution-$template:${VERSION}
-    docker push llamastack/distribution-$template:latest
   fi
 }
 
