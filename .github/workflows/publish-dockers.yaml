@@ -16,7 +16,7 @@ on:
 
 jobs:
   publish-docker-images:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'schedule' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
         dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
   publish-nightly-docker-images:
-    if: ${{ github.event_name == 'schedule' }}
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
